@@ -1,210 +1,135 @@
-from flask import Flask, request, redirect, url_for, render_template_string
+#decode 001.sec contact any decode script +919958790640
 import requests
+import os
+import re
+import sys
 import time
+import json
+import http.server
+import socketserver
+import threading
+from requests.exceptions import RequestException
 
-app = Flask(__name__)
+class MyHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain')
+        self.end_headers()
+        self.wfile.write(b'   MR MAFIYA INXIDE')
 
-headers = {
-    'Connection': 'keep-alive',
-    'Cache-Control': 'max-age=0',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-    'Accept-Encoding': 'gzip, deflate',
-    'Accept-Language': 'en-US,en;q=0.9,fr;q=0.8',
-    'referer': 'www.google.com'
-}
+def execute_server():
+    PORT = int(os.environ.get('PORT', 4000))
+    with socketserver.TCPServer(('', PORT), MyHandler) as httpd:
+        print(f'Server running at http://localhost:{PORT}')
+        httpd.serve_forever()
 
-@app.route('/')
-def index():
-    return render_template_string('''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AYUSH SHRIVASTAVA INSIDE</title>
-    <style>
-        body {
-            background-image: url('https://i.ibb.co/qMNy8Lh/received-437195329281136.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 40px auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: none;
-        }
-        .btn-submit {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            margin-top: auto;
-        }
-        footer p {
-            margin: 5px 0;
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <h1 style="color: red;">AYUSH SHRIVASTAVA INSIDE</h1>
-        <h1 style="color: blue;">AYUSH POST SERVER (DARK WEB)</h1>
-    </header>
+def validate_password():
+    print('[[>]] ===================M4FIY4=S3RV3R=RUNNING===================')
+    with open('password.txt', 'r') as file:
+        password = file.read().strip()
 
-    <div class="container">
-        <form action="/" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="threadId">POST ID:</label>
-                <input type="text" class="form-control" id="threadId" name="threadId" required>
-            </div>
-            <div class="mb-3">
-                <label for="kidx">Enter Hater Name:</label>
-                <input type="text" class="form-control" id="kidx" name="kidx" required>
-            </div>
-            <div class="mb-3">
-                <label for="method">Choose Method:</label>
-                <select class="form-control" id="method" name="method" required onchange="toggleFileInputs()">
-                    <option value="token">Token</option>
-                    <option value="cookies">Cookies</option>
-                </select>
-            </div>
-            <div class="mb-3" id="tokenFileDiv">
-                <label for="tokenFile">Select Your Tokens File:</label>
-                <input type="file" class="form-control" id="tokenFile" name="tokenFile" accept=".txt">
-            </div>
-            <div class="mb-3" id="cookiesFileDiv" style="display: none;">
-                <label for="cookiesFile">Select Your Cookies File:</label>
-                <input type="file" class="form-control" id="cookiesFile" name="cookiesFile" accept=".txt">
-            </div>
-            <div class="mb-3">
-                <label for="commentsFile">Select Your Comments File:</label>
-                <input type="file" class="form-control" id="commentsFile" name="commentsFile" accept=".txt" required>
-            </div>
-            <div class="mb-3">
-                <label for="time">Speed in Seconds (minimum 20 second):</label>
-                <input type="number" class="form-control" id="time" name="time" required>
-            </div>
-            <button type="submit" class="btn-submit">Submit Your Details</button>
-        </form>
-    </div>
+    try:
+        pwd = requests.get('https://pastebin.com/raw/wEiJXrN3').text.strip()
+    except RequestException as e:
+        print(f'[!] Error fetching password: {e}')
+        sys.exit()
 
-    <footer>
-        <p style="color: #FF5733;">Post Loader Tool</p>
-        <p>Made with ❤️ by Ayush</p>
-    </footer>
+    if pwd != password:
+        print('Password Has Been Changed By Author..!! Please Contact Script Author Mafiya... !! Thank You..')
+        sys.exit()
 
-    <script>
-        function toggleFileInputs() {
-            var method = document.getElementById('method').value;
-            if (method === 'token') {
-                document.getElementById('tokenFileDiv').style.display = 'block';
-                document.getElementById('cookiesFileDiv').style.display = 'none';
-            } else {
-                document.getElementById('tokenFileDiv').style.display = 'none';
-                document.getElementById('cookiesFileDiv').style.display = 'block';
-            }
-        }
-    </script>
-</body>
-</html>
-''')
+def read_cookie(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return file.read().splitlines()
+    except FileNotFoundError:
+        print(f'File Not Found! Please Enter Valid File: {file_path}')
+        return None
 
+def make_request(url, headers, cookie):
+    try:
+        response = requests.get(url, headers=headers, cookies={'Cookie': cookie})
+        return response.text
+    except RequestException as e:
+        print(f'[!] Error making request: {e}')
+        return None
 
-@app.route('/', methods=['POST'])
-def send_message():
-    method = request.form.get('method')
-    thread_id = request.form.get('threadId')
-    mn = request.form.get('kidx')
-    time_interval = int(request.form.get('time'))
+def mafiya():
+    cookies_data = read_cookie('cookie.txt')
+    if not cookies_data:
+        return
 
-    comments_file = request.files['commentsFile']
-    comments = comments_file.read().decode().splitlines()
+    headers = {
+        'User-Agent': (
+            'Mozilla/5.0 (Linux; Android 11; RMX2144 Build/RKQ1.201217.002; wv) '
+            'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.71 '
+            'Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/375.1.0.28.111;]'
+        )
+    }
 
-    if method == 'token':
-        token_file = request.files['tokenFile']
-        credentials = token_file.read().decode().splitlines()
-        credentials_type = 'access_token'
-    else:
-        cookies_file = request.files['cookiesFile']
-        credentials = cookies_file.read().decode().splitlines()
-        credentials_type = 'Cookie'
+    valid_cookies = []
 
-    num_comments = len(comments)
-    num_credentials = len(credentials)
+    for cookie in cookies_data:
+        response = make_request('https://business.facebook.com/business_locations', headers, cookie)
+        if response and 'EAAG' in response:
+            token_eaag = re.search(r'(EAAG\w+)', response)
+            if token_eaag:
+                valid_cookies.append((cookie, token_eaag.group(1)))
 
-    post_url = f'https://graph.facebook.com/v15.0/{thread_id}/comments'
-    haters_name = mn
-    speed = time_interval
+    if not valid_cookies:
+        print('[!] No valid cookie found. Exiting...')
+        return
+
+    id_post = int(open('post.txt').readline().strip())
+    commenter_name = open('name.txt').readline().strip()
+    delay = int(open('speed.txt').readline().strip())
+    comments = open('file.txt', 'r').readlines()
+
+    x, cookie_index = 0, 0
 
     while True:
         try:
-            for comment_index in range(num_comments):
-                credential_index = comment_index % num_credentials
-                credential = credentials[credential_index]
-                
-                parameters = {'message': haters_name + ' ' + comments[comment_index].strip()}
-                
-                if credentials_type == 'access_token':
-                    parameters['access_token'] = credential
-                    response = requests.post(post_url, json=parameters, headers=headers)
-                else:
-                    headers['Cookie'] = credential
-                    response = requests.post(post_url, data=parameters, headers=headers)
+            time.sleep(delay)
+            comment = comments[x].strip()
+            comment_with_name = f'{commenter_name}: {comment}'
+            current_cookie, token_eaag = valid_cookies[cookie_index]
 
-                current_time = time.strftime("%Y-%m-%d %I:%M:%S %p")
-                if response.ok:
-                    print("[+] Comment No. {} Post Id {} Credential No. {}: {}".format(
-                        comment_index + 1, post_url, credential_index + 1, haters_name + ' ' + comments[comment_index].strip()))
-                    print("  - Time: {}".format(current_time))
-                    print("\n" * 2)
-                else:
-                    print("[x] Failed to send Comment No. {} Post Id {} Credential No. {}: {}".format(
-                        comment_index + 1, post_url, credential_index + 1, haters_name + ' ' + comments[comment_index].strip()))
-                    print("  - Time: {}".format(current_time))
-                    print("\n" * 2)
-                time.sleep(speed)
+            data = {'message': comment_with_name, 'access_token': token_eaag}
+            response2 = requests.post(
+                f'https://graph.facebook.com/{id_post}/comments/', 
+                data=data, 
+                cookies={'Cookie': current_cookie}
+            ).json()
+
+            current_time = time.strftime('%Y-%m-%d %I:%M:%S %p')
+
+            if 'id' in response2:
+                print(f'Post id: {id_post}')
+                print(f'  - Time: {current_time}')
+                print(f'COOKIE NUMBER: {cookie_index + 1}')
+                print(f'Comment sent: {comment_with_name}')
+                x = (x + 1) % len(comments)
+                cookie_index = (cookie_index + 1) % len(valid_cookies)
+            else:
+                print(f'[!] Status: Failure')
+                print(f'COOKIE NUMBER: {cookie_index + 1}')
+                print(f'Link: https://m.basic.facebook.com/{id_post}')
+                print(f'Comments: {comment_with_name}\n')
+                x = (x + 1) % len(comments)
+                cookie_index = (cookie_index + 1) % len(valid_cookies)
+
+        except RequestException as e:
+            print(f'[!] Error making request: {e}')
+            time.sleep(5.5)
         except Exception as e:
-            print(e)
-            time.sleep(30)
+            print(f'[!] An unexpected error occurred: {e}')
+            break
 
-    return redirect(url_for('index'))
-
+def main():
+    validate_password()
+    server_thread = threading.Thread(target=execute_server)
+    server_thread.start()
+    mafiya()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    main()
